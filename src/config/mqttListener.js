@@ -34,6 +34,7 @@ export const startMQTTListener = () => {
         cambienNhietdo,
         cambienDoam_Mat_Dat,
         cambienAnhSang,
+        cambienDoam_Khong_Khi,
       } = payload;
 
       if (!IdStyemLocation) {
@@ -50,6 +51,7 @@ export const startMQTTListener = () => {
         cambienNhietdo,
         cambienDoam_Mat_Dat,
         cambienAnhSang,
+        cambienDoam_Khong_Khi,
       });
 
       const createHistoryWaterpump = await HistoryWaterpumpServices.createHistoryWaterpump({

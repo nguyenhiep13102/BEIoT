@@ -42,6 +42,12 @@ const updateCareplant = async (id, data) => {
       "cambienNhietdo",
       "cambienDoam_Mat_Dat",
       "cambienAnhSang",
+      "cambienDoam_Khong_Khi",
+      "chedoTuDong",
+      "gioBatMaybom",
+      "gioTatMaybom",
+      "gioBatDen",
+      "gioTatDen",
     ];
 
     for (const field of updatableFields) {
@@ -123,7 +129,7 @@ const getCareplantById = async (id) => {
 
 const controllerWaterpump = async (data) => {
   try {
-    // Chỉ lấy các field cần gửi xuống IoT
+    
     const controllerData = {
       IdStyemLocation: data.IdStyemLocation,
       trangthaiMaybom: data.trangthaiMaybom,
@@ -134,7 +140,7 @@ const controllerWaterpump = async (data) => {
 
     console.log("🚀 Sending command:", controllerData);
 
-    // Gửi MQTT command
+    
     sendFanCommand.sendFanCommand(controllerData);
 
     return {

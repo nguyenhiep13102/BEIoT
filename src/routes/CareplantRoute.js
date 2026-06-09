@@ -9,7 +9,7 @@ routes.delete('/delete/:id', CareplantController.deleteCareplant);
 routes.post('/delete-many', CareplantController.deleteCareplantMany);
 routes.get('/getAll', CareplantController.getAllCareplant);
 routes.get('/getDetail/:id', CareplantController.getCareplantById);
-routes.put('/controllerIoT/:id', CareplantController.controllerWaterpump);
+routes.post('/controllerIoT/:id', CareplantController.controllerWaterpump);
 
 export default routes;
 

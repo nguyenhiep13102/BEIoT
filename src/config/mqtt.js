@@ -1,5 +1,5 @@
 import mqtt from "mqtt";
-
+//mosquitto.exe -c mosquitto.conf -v
 const createMQTTClient = () => {
   if (!process.env.MQTT_BROKER) {
     console.error("❌ MQTT_BROKER chưa được khai báo trong .env");
