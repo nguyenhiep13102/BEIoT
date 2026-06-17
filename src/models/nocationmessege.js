@@ -15,9 +15,14 @@ const nocationmessageSchema = new mongoose.Schema(
         ref: 'User',
       },
     ],
+    deviceId:{ type: String,  },
+    type:{ type: String,  },
     content: { type: String, required: true },
     description: { type: String, required: true },
-   
+   status: {
+        type: String,
+        default: "ACTIVE"
+    }
   },
   {
     timestamps: true,

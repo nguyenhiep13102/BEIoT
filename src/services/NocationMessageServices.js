@@ -1,17 +1,52 @@
 import NocationMessage from '../models/nocationmessege.js';
 
-const createNocationMessage = async (data) => {
-  try {
-    const newDoc = new NocationMessage(data);
-    const saved = await newDoc.save();
-    return {
-      status: 'success',
-      message: 'Tạo NocationMessage thành công!',
-      data: saved,
-    };
-  } catch (e) {
-    throw e;
+const createNotification = async (
+  item,
+  type,
+  content,
+  description
+) => {
+
+  const ALERT_REPEAT_MINUTES = 1;
+
+  const lastNotification =
+    await NocationMessage.findOne({
+
+      deviceId: item.IdStyemLocation,
+
+      type
+
+    })
+      .sort({
+        createdAt: -1
+      });
+
+  if (lastNotification) {
+
+    const diffMinutes =
+      (Date.now() -
+        lastNotification.createdAt.getTime())
+      / (1000 * 60);
+
+    if (diffMinutes < ALERT_REPEAT_MINUTES) {
+      return;
+    }
   }
+
+  await NocationMessage.create({
+
+    IDusers: item.IDusers,
+
+    deviceId: item.IdStyemLocation,
+
+    type,
+
+    content,
+
+    description,
+
+  });
+
 };
 
 const updateNocationMessage = async (id, data) => {
@@ -73,16 +108,27 @@ const getAllNocationMessage = async () => {
   }
 };
 
-const getNocationMessageById = async (id) => {
+const getNocationMessageById = async (userId) => {
   try {
-    return await NocationMessage.findById(id).populate('IDusers').populate('readBy');
+
+    console.log('User ID:', userId);
+
+    return await NocationMessage
+      .find({
+        IDusers: userId
+      })
+      
+      .sort({
+        createdAt: -1
+      });
+
   } catch (e) {
     throw e;
   }
 };
 
 export default {
-  createNocationMessage,
+  createNotification,
   updateNocationMessage,
   deleteNocationMessage,
   deleteNocationMessageMany,

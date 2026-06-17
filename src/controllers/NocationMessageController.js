@@ -80,6 +80,7 @@ const getAllNocationMessage = async (req, res) => {
 const getNocationMessageById = async (req, res) => {
   try {
     const { id } = req.params;
+    // Debug log
     const data = await NocationMessageServices.getNocationMessageById(id);
     if (!data) {
       return res.status(404).json({

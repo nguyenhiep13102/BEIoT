@@ -22,6 +22,7 @@ client.on("connect", () => {
       cambienNhietdo: (20 + Math.random() * 15),
       cambienDoam_Mat_Dat: (40 + Math.random() * 50),
       cambienAnhSang: Math.floor(Math.random() * 1000),
+      cambienDoam_Khong_Khi: (30 + Math.random() * 70),
     };
 
     client.publish(
