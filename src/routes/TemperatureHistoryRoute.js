@@ -9,6 +9,6 @@ routes.delete('/delete/:id', TemperatureHistoryController.deleteTemperatureHisto
 routes.post('/delete-many', TemperatureHistoryController.deleteTemperatureHistoryMany);
 routes.get('/getAll', TemperatureHistoryController.getAllTemperatureHistory);
 routes.get('/getDetail/:id', TemperatureHistoryController.getTemperatureHistoryById);
-
+routes.get('/getDetail200/:id', TemperatureHistoryController.getHistoryLineById200);
 export default routes;
 

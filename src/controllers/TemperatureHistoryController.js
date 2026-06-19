@@ -1,5 +1,5 @@
 import TemperatureHistoryServices from '../services/TemperatureHistoryServices.js';
-
+import HistoryLine from '../models/temperaturehistory.js';
 const createTemperatureHistory = async (req, res) => {
   try {
     const result = await TemperatureHistoryServices.createTemperatureHistory(req.body);
@@ -99,6 +99,29 @@ const getTemperatureHistoryById = async (req, res) => {
   }
 };
 
+const getHistoryLineById200 = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Quét ngược từ đáy bảng lên để lấy chính xác 200 bản ghi mới chèn vào cuối cùng
+    const historyData = await HistoryLine.find({ IdStyemLocation: id }) 
+      .sort({ $natural: -1 }) 
+      .limit(200);         
+
+    return res.status(200).json({
+      success: true,
+      data: historyData
+    });
+
+  } catch (error) {
+    console.error("Lỗi khi lấy 200 dữ liệu lịch sử mới nhất từ đáy bảng:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Có lỗi xảy ra tại hệ thống server.",
+      error: error.message
+    });
+  }
+};
 export default {
   createTemperatureHistory,
   updateTemperatureHistory,
@@ -106,5 +129,6 @@ export default {
   deleteTemperatureHistoryMany,
   getAllTemperatureHistory,
   getTemperatureHistoryById,
+  getHistoryLineById200
 };
 
